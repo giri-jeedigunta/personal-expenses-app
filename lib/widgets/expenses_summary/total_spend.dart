@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
 class TotalSpend extends StatelessWidget {
+  // DateTime dateTime = DateTime.now();
+
   const TotalSpend({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // ignore: avoid_print
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +35,7 @@ class TotalSpend extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.fromLTRB(1, 8, 0, 8),
                   child: Text(
-                    'Total spend',
+                    'Total spend - Aug 2022',
                     style: TextStyle(
                       color: Color.fromRGBO(118, 128, 138, 1),
                       fontWeight: FontWeight.w700,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses_app_by_gj/widgets/expenses_summary/summary_widget.dart';
-import 'package:personal_expenses_app_by_gj/header_widget.dart';
+import 'package:personal_expenses_app_by_gj/widgets/header_widget.dart';
 
 void main() => runApp(const MyApp());
 
