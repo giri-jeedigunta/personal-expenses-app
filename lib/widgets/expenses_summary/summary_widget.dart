@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_app_by_gj/widgets/expenses_summary/expenses_chart.dart';
-import 'package:personal_expenses_app_by_gj/widgets/expenses_summary/total_spend.dart';
+import 'expenses_chart.dart';
+import 'total_spend.dart';
 
 class ExpensesSummary extends StatelessWidget {
   const ExpensesSummary({
