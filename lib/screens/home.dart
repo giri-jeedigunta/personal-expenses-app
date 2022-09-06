@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_app_by_gj/constants.dart';
+import '../constants.dart';
 
 import '../widgets/expenses_summary/summary_widget.dart';
 
