@@ -11,7 +11,7 @@ class Transaction {
   final String title;
 
   @HiveField(2)
-  final double amout;
+  final double amount;
 
   @HiveField(3)
   final DateTime transactionDate;
@@ -25,7 +25,7 @@ class Transaction {
   Transaction({
     required this.id,
     required this.title,
-    required this.amout,
+    required this.amount,
     required this.transactionDate,
     required this.createdOn,
     this.category,

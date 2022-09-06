@@ -15,7 +15,7 @@ void main() async {
   // DBService().addTransaction(Transaction(
   //   id: "0",
   //   title: "0",
-  //   amout: 99.99,
+  //   amount: 99.99,
   //   transactionDate: DateTime.now(),
   //   createdOn: DateTime.now(),
   //   category: "testing",

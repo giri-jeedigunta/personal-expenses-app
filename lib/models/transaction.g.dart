@@ -19,7 +19,7 @@ class TransactionAdapter extends TypeAdapter<Transaction> {
     return Transaction(
       id: fields[0] as String,
       title: fields[1] as String,
-      amout: fields[2] as double,
+      amount: fields[2] as double,
       transactionDate: fields[3] as DateTime,
       createdOn: fields[4] as DateTime,
       category: fields[5] as String?,
@@ -35,7 +35,7 @@ class TransactionAdapter extends TypeAdapter<Transaction> {
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.amout)
+      ..write(obj.amount)
       ..writeByte(3)
       ..write(obj.transactionDate)
       ..writeByte(4)

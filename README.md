@@ -1,6 +1,8 @@
-# personal_expenses_app_by_gj
+# Manage your personal expenses
 
-A new Flutter project.
+A new Flutter app that allows you to manage your personal daily / weekly / monthly expenses with complete privacy. YOU own and control your data no one else should!
+
+Stay tuned !!!
 
 ## Getting Started
 

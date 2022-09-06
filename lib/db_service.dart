@@ -19,7 +19,7 @@ class DBService {
     box = await Hive.openBox<Transaction>('transaction');
     box.put(0, transaction);
     box.put(1, transaction);
-    box.put(3, transaction);
+    box.put(2, transaction);
   }
 
   Future<List> getTransactions() async {

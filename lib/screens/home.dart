@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(
             context,
-            newTRansactionRoute,
+            db,
             arguments: 'Data from home',
           );
         },

@@ -13,34 +13,8 @@ class NewTransaction extends StatefulWidget {
 }
 
 class _NewTransactionState extends State<NewTransaction> {
-  var data;
-
-  @override
-  initState() {
-    // TODO: implement initState
-    super.initState();
-    DBService().addTransaction(
-      Transaction(
-        id: "0",
-        title: "blah...",
-        amout: 99,
-        transactionDate: DateTime.now(),
-        createdOn: DateTime.now(),
-      ),
-    );
-
-    var list = DBService().getTransactions();
-    setState(() {
-      data = list;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    final Future<dynamic> list = DBService().getTransactions();
-    print("list");
-    print(list);
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -59,62 +33,10 @@ class _NewTransactionState extends State<NewTransaction> {
         ),
       ),
       body: Container(
-        color: const Color.fromRGBO(247, 247, 246, 1),
-        child: FutureBuilder(
-          future: list, // a previously-obtained Future<String> or null
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            List<Widget> children;
-            if (snapshot.hasData) {
-              children = <Widget>[
-                ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        height: 50,
-                        child: Center(
-                          child: Text(
-                            '${snapshot.data[index].title}',
-                          ),
-                        ),
-                      );
-                    })
-              ];
-            } else if (snapshot.hasError) {
-              children = <Widget>[
-                const Icon(
-                  Icons.error_outline,
-                  color: Colors.red,
-                  size: 60,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Text('Error: ${snapshot.error}'),
-                ),
-              ];
-            } else {
-              children = const <Widget>[
-                SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: CircularProgressIndicator(),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16),
-                  child: Text('Awaiting result...'),
-                ),
-              ];
-            }
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: children,
-              ),
-            );
-          },
-        ),
-      ),
+          color: const Color.fromRGBO(247, 247, 246, 1),
+          child: const Center(
+            child: Text('New Trnsaction'),
+          )),
     );
   }
 }
