@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import '../db_service.dart';
 import '../models/transaction.dart';
+import '../widgets/text_box.dart';
 
 class NewTransaction extends StatefulWidget {
   const NewTransaction({Key? key}) : super(key: key);
@@ -13,6 +14,8 @@ class NewTransaction extends StatefulWidget {
 }
 
 class _NewTransactionState extends State<NewTransaction> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +36,70 @@ class _NewTransactionState extends State<NewTransaction> {
         ),
       ),
       body: Container(
-          color: const Color.fromRGBO(247, 247, 246, 1),
-          child: const Center(
-            child: Text('New Trnsaction'),
-          )),
+        color: const Color.fromRGBO(247, 247, 246, 1),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(18, 10, 18, 0),
+              child: Text(
+                'Add expense',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextBox(
+                    title: "How much did you spend?",
+                    onChanged: () {
+                      print("amount");
+                    },
+                  ),
+                  TextBox(
+                    title: "What did you spend on...",
+                    onChanged: () {
+                      print("what");
+                    },
+                  ),
+                  TextBox(
+                    title:
+                        "What type of expense? Eg: groceries, clothing & accessories",
+                    onChanged: () {
+                      print("type");
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          if (_formKey.currentState!.validate()) {
+            print("valid .... ");
+            await DBService().addTransaction(
+              Transaction(
+                id: "0",
+                title: "blah...",
+                amount: 99,
+                transactionDate: DateTime.now(),
+                createdOn: DateTime.now(),
+              ),
+            );
+          }
+        },
+        tooltip: 'Add transaction',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import '../db_service.dart';
 import '../models/transaction.dart';
+import 'package:intl/intl.dart';
 
 class DB extends StatefulWidget {
   const DB({Key? key}) : super(key: key);
@@ -19,15 +20,15 @@ class _DBState extends State<DB> {
   initState() {
     // TODO: implement initState
     super.initState();
-    DBService().addTransaction(
-      Transaction(
-        id: "0",
-        title: "blah...",
-        amount: 99,
-        transactionDate: DateTime.now(),
-        createdOn: DateTime.now(),
-      ),
-    );
+    // DBService().addTransaction(
+    //   Transaction(
+    //     id: "0",
+    //     title: "blah...",
+    //     amount: 99,
+    //     transactionDate: DateTime.now(),
+    //     createdOn: DateTime.now(),
+    //   ),
+    // );
 
     var list = DBService().getTransactions();
     setState(() {
@@ -70,9 +71,14 @@ class _DBState extends State<DB> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       var transaction = snapshot.data[index];
+                      String created =
+                          DateFormat.yMMMEd().format(transaction.createdOn);
+                      String transactionRecorded = DateFormat.yMMMEd()
+                          .format(transaction.transactionDate);
+
                       return SizedBox(
                         child: Text(
-                          '${transaction.id}  ${transaction.title} ${transaction.amount}',
+                          '${transaction.id}  ${transaction.title} ${transaction.amount} $transactionRecorded $created',
                         ),
                       );
                     })
@@ -102,11 +108,8 @@ class _DBState extends State<DB> {
                 ),
               ];
             }
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: children,
-              ),
+            return Column(
+              children: children,
             );
           },
         ),

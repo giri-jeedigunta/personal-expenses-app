@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
     // DBService().initDb(isDbInitiatedCheck);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.generateRoute,
       initialRoute: homeRoute,
       title: 'Flutter Demo',

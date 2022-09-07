@@ -28,6 +28,17 @@ class Home extends StatelessWidget {
             backgroundColor: Colors.black,
           ),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  db,
+                  arguments: 'Data from home',
+                );
+              },
+              icon: Icon(Icons.settings))
+        ],
       ),
       body: Container(
         color: const Color.fromRGBO(247, 247, 246, 1),
@@ -42,7 +53,7 @@ class Home extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(
             context,
-            db,
+            newTRansactionRoute,
             arguments: 'Data from home',
           );
         },
