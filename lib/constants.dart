@@ -1,3 +1,3 @@
-const String homeRoute = '/';
-const String newTRansactionRoute = '/newTransaction';
+const String home = '/';
+const String addExpense = '/addExpense';
 const String db = '/db';

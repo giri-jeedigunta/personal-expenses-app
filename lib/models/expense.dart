@@ -1,20 +1,20 @@
 import 'package:hive/hive.dart';
 
-part 'transaction.g.dart';
+part 'expense.g.dart';
 
 @HiveType(typeId: 1)
-class Transaction {
+class Expense {
   @HiveField(0)
   final String id;
 
   @HiveField(1)
-  final String title;
+  final String details;
 
   @HiveField(2)
   final double amount;
 
   @HiveField(3)
-  final DateTime transactionDate;
+  final DateTime expenseDate;
 
   @HiveField(4)
   final DateTime createdOn;
@@ -22,11 +22,11 @@ class Transaction {
   @HiveField(5)
   final String? category;
 
-  Transaction({
+  Expense({
     required this.id,
-    required this.title,
+    required this.details,
     required this.amount,
-    required this.transactionDate,
+    required this.expenseDate,
     required this.createdOn,
     this.category,
   });

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'screens/db_view.dart';
-import 'screens/new_transaction.dart';
+import 'screens/add_expense.dart';
 import 'screens/home.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case homeRoute:
+      case home:
         return MaterialPageRoute(
           builder: (_) => const Home(),
         );
-      case newTRansactionRoute:
+      case addExpense:
         return MaterialPageRoute(
           builder: (_) => const NewTransaction(),
         );

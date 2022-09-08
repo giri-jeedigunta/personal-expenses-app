@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import '../db_service.dart';
-import '../models/transaction.dart';
 import 'package:intl/intl.dart';
 
 class DB extends StatefulWidget {
@@ -20,17 +16,17 @@ class _DBState extends State<DB> {
   initState() {
     // TODO: implement initState
     super.initState();
-    // DBService().addTransaction(
+    // DBService().addExpenses(
     //   Transaction(
     //     id: "0",
-    //     title: "blah...",
+    //     details: "blah...",
     //     amount: 99,
-    //     transactionDate: DateTime.now(),
+    //     expenseDate: DateTime.now(),
     //     createdOn: DateTime.now(),
     //   ),
     // );
 
-    var list = DBService().getTransactions();
+    var list = DBService().getExpenses();
     setState(() {
       data = list;
     });
@@ -38,7 +34,7 @@ class _DBState extends State<DB> {
 
   @override
   Widget build(BuildContext context) {
-    final Future<dynamic> list = DBService().getTransactions();
+    final Future<dynamic> list = DBService().getExpenses();
 
     return Scaffold(
       appBar: AppBar(
@@ -73,12 +69,12 @@ class _DBState extends State<DB> {
                       var transaction = snapshot.data[index];
                       String created =
                           DateFormat.yMMMEd().format(transaction.createdOn);
-                      String transactionRecorded = DateFormat.yMMMEd()
-                          .format(transaction.transactionDate);
+                      String transactionRecorded =
+                          DateFormat.yMMMEd().format(transaction.expenseDate);
 
                       return SizedBox(
                         child: Text(
-                          '${transaction.id}  ${transaction.title} ${transaction.amount} $transactionRecorded $created',
+                          '${transaction.details} ${transaction.amount} $transactionRecorded $created',
                         ),
                       );
                     })

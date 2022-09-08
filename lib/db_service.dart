@@ -1,42 +1,41 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:uuid/uuid.dart';
 
-import 'models/transaction.dart';
+import 'models/expense.dart';
 
 class DBService {
   var box;
+
+  final uuid = const Uuid();
 
   Future initDb() async {
     print("initDb ... ");
     final appDocumentsDirectory = await getApplicationDocumentsDirectory();
     await Hive.initFlutter(appDocumentsDirectory.path);
-    Hive.registerAdapter(TransactionAdapter());
-    box = await Hive.openBox<Transaction>('transaction');
+    Hive.registerAdapter(ExpenseAdapter());
+    box = await Hive.openBox<Expense>('Expenses');
   }
 
-  Future addTransaction(Transaction transaction) async {
-    print("addTransaction ... ");
-    box = await Hive.openBox<Transaction>('transaction');
-    box.put(0, transaction);
-    box.put(1, transaction);
-    box.put(2, transaction);
+  Future addExpense(Expense expenseDetails) async {
+    print("Add Expense op ... ");
+    box = await Hive.openBox<Expense>('Expenses');
+    box.put(uuid.v4(), expenseDetails);
   }
 
-  Future<List> getTransactions() async {
-    var allTransactions = [];
+  Future<List> getExpenses() async {
+    var allExpenses = [];
 
-    print("readTransactions ... ");
-    box = await Hive.openBox<Transaction>('transaction');
+    print("read Expenses ... ");
+    box = await Hive.openBox<Expense>('Expenses');
 
-    for (int i = 0; i < box.length; i++) {
-      if (box.get(i) != null) {
-        allTransactions.add(box.get(i));
+    for (var k in box.keys) {
+      if (box.get(k) != null) {
+        allExpenses.add(box.get(k));
       }
     }
 
-    print("allTransactions");
-    print(allTransactions);
-    return allTransactions;
+    return allExpenses;
   }
 
   DBService();

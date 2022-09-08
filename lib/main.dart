@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'db_service.dart';
 import 'constants.dart';
 import 'screens/home.dart';
@@ -14,9 +14,9 @@ void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // DBService().addTransaction(Transaction(
   //   id: "0",
-  //   title: "0",
+  //   details: "0",
   //   amount: 99.99,
-  //   transactionDate: DateTime.now(),
+  //   expenseDate: DateTime.now(),
   //   createdOn: DateTime.now(),
   //   category: "testing",
   // ));
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: homeRoute,
+      initialRoute: home,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

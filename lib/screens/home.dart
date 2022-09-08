@@ -37,7 +37,7 @@ class Home extends StatelessWidget {
                   arguments: 'Data from home',
                 );
               },
-              icon: Icon(Icons.settings))
+              icon: const Icon(Icons.settings))
         ],
       ),
       body: Container(
@@ -53,7 +53,7 @@ class Home extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(
             context,
-            newTRansactionRoute,
+            addExpense,
             arguments: 'Data from home',
           );
         },
