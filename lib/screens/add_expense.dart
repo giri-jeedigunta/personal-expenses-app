@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
 
@@ -30,7 +31,7 @@ class _NewTransactionState extends State<NewTransaction> {
     _detailsController = TextEditingController(text: null);
     _categoryController = TextEditingController(text: null);
     _expenseDateController =
-        TextEditingController(text: DateTime.now().toString());
+        TextEditingController(text: Jiffy().dateTime.toString());
   }
 
   @override
@@ -117,9 +118,9 @@ class _NewTransactionState extends State<NewTransaction> {
                       onTap: () async {
                         DateTime? expenseDateController = await showDatePicker(
                             context: context,
-                            initialDate: DateTime.now(),
+                            initialDate: Jiffy().dateTime,
                             firstDate: DateTime(
-                                2000), //DateTime.now() - not to allow to choose before today.
+                                2000), //Jiffy().dateTime - not to allow to choose before today.
                             lastDate: DateTime(2101));
 
                         if (expenseDateController != null) {
@@ -170,6 +171,8 @@ class _NewTransactionState extends State<NewTransaction> {
             print(_detailsController.text);
             print(DateTime.parse(_expenseDateController.text));
             print(_categoryController.text);
+            print(Jiffy().MMM);
+            print(Jiffy().week);
             await DBService().addExpense(
               Expense(
                 id: uuid.v4(),
@@ -177,7 +180,9 @@ class _NewTransactionState extends State<NewTransaction> {
                 amount: double.parse(_amountController.text),
                 category: _categoryController.text,
                 expenseDate: DateTime.parse(_expenseDateController.text),
-                createdOn: DateTime.now(),
+                createdOn: Jiffy().dateTime,
+                month: Jiffy().MMM,
+                weekNo: Jiffy().week,
               ),
             );
 

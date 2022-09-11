@@ -22,6 +22,12 @@ class Expense {
   @HiveField(5)
   final String? category;
 
+  @HiveField(6)
+  final String month;
+
+  @HiveField(7)
+  final int weekNo;
+
   Expense({
     required this.id,
     required this.details,
@@ -29,5 +35,7 @@ class Expense {
     required this.expenseDate,
     required this.createdOn,
     this.category,
+    required this.month,
+    required this.weekNo,
   });
 }
