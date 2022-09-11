@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
@@ -12,7 +14,10 @@ class DBService {
   Future initDb() async {
     print("initDb ... ");
     final appDocumentsDirectory = await getApplicationDocumentsDirectory();
-    await Hive.initFlutter(appDocumentsDirectory.path);
+    var hiveDbPath =
+        Directory('${appDocumentsDirectory.path}/PersonalExpensesAppData');
+    hiveDbPath.delete(recursive: true);
+    await Hive.initFlutter('PersonalExpensesAppData');
     Hive.registerAdapter(ExpenseAdapter());
     box = await Hive.openBox<Expense>('Expenses');
   }
