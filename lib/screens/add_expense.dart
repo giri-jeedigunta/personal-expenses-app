@@ -167,12 +167,6 @@ class _NewTransactionState extends State<NewTransaction> {
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
             print("valid .... ");
-            print(double.parse(_amountController.text));
-            print(_detailsController.text);
-            print(DateTime.parse(_expenseDateController.text));
-            print(_categoryController.text);
-            print(Jiffy().MMM);
-            print(Jiffy().week);
             await DBService().addExpense(
               Expense(
                 id: uuid.v4(),
@@ -181,8 +175,8 @@ class _NewTransactionState extends State<NewTransaction> {
                 category: _categoryController.text,
                 expenseDate: DateTime.parse(_expenseDateController.text),
                 createdOn: Jiffy().dateTime,
-                month: Jiffy().MMM,
-                weekNo: Jiffy().week,
+                month: Jiffy(_expenseDateController.text).MMM,
+                weekNo: Jiffy(_expenseDateController.text).week,
               ),
             );
 

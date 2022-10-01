@@ -16,7 +16,7 @@ class DBService {
     final appDocumentsDirectory = await getApplicationDocumentsDirectory();
     var hiveDbPath =
         Directory('${appDocumentsDirectory.path}/PersonalExpensesAppData');
-    hiveDbPath.delete(recursive: true);
+    // hiveDbPath.delete(recursive: true);
     await Hive.initFlutter('PersonalExpensesAppData');
     Hive.registerAdapter(ExpenseAdapter());
     box = await Hive.openBox<Expense>('Expenses');
@@ -28,18 +28,29 @@ class DBService {
     box.put(uuid.v4(), expenseDetails);
   }
 
-  Future<List> getExpenses() async {
-    var allExpenses = [];
+  Future<List> getExpenses(String month, bool shouldSendFullList) async {
+    final List<Expense> allExpenses = [];
 
     print("read Expenses ... ");
     box = await Hive.openBox<Expense>('Expenses');
 
-    for (var k in box.keys) {
-      if (box.get(k) != null) {
-        allExpenses.add(box.get(k));
+    if (shouldSendFullList) {
+      for (var k in box.keys) {
+        if (box.get(k) != null) {
+          allExpenses.add(box.get(k));
+        }
+      }
+    } else {
+      for (var k in box.keys) {
+        if (box.get(k) != null && box.get(k).month == month) {
+          allExpenses.add(box.get(k));
+        }
       }
     }
 
+    allExpenses.sort((p1, p2) {
+      return Comparable.compare(p1.expenseDate, p2.expenseDate);
+    });
     return allExpenses;
   }
 

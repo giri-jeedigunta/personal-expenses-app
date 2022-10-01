@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:intl/intl.dart';
 
+import '../../models/expense.dart';
 import '../../models/expenses_per_week.dart';
 
 class ExpensesChart extends StatelessWidget {
+  final List<Expense> expensesPerMonth;
   const ExpensesChart({
     Key? key,
+    required this.expensesPerMonth,
   }) : super(key: key);
 
   static const secondaryMeasureAxisId = 'secondaryMeasureAxisId';
@@ -19,13 +22,13 @@ class ExpensesChart extends StatelessWidget {
 // locale: 'sv_se'
     final expensesData = [
       ExpensesPerWeek(
-          weekLabel: '8-14', weekNumber: 2, weeklyExpensesTotal: 300.00),
+          weekLabel: '1-7', weekNumber: 2, weeklyExpensesTotal: 300.00),
       ExpensesPerWeek(
-          weekLabel: '15-21', weekNumber: 3, weeklyExpensesTotal: 100),
+          weekLabel: '8-14', weekNumber: 3, weeklyExpensesTotal: 100),
       ExpensesPerWeek(
-          weekLabel: '22-28', weekNumber: 4, weeklyExpensesTotal: 1000),
+          weekLabel: '15-21', weekNumber: 4, weeklyExpensesTotal: 1000),
       ExpensesPerWeek(
-          weekLabel: '29-31', weekNumber: 5, weeklyExpensesTotal: 2000),
+          weekLabel: '22-31', weekNumber: 5, weeklyExpensesTotal: 2000),
     ];
 
     final series = [

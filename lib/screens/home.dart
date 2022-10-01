@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
+import 'package:personal_expenses_app_by_gj/db_service.dart';
 import '../constants.dart';
 
 import '../widgets/expenses_summary/summary_widget.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  var expensesPerMonth;
+
+  @override
+  void initState() {
+    super.initState();
+    final data = DBService().getExpenses(Jiffy().MMM, false);
+
+    setState(() {
+      expensesPerMonth = data;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +64,36 @@ class Home extends StatelessWidget {
         color: const Color.fromRGBO(247, 247, 246, 1),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const <Widget>[
-            ExpensesSummary(),
+          children: <Widget>[
+            FutureBuilder(
+                future: expensesPerMonth,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData && snapshot.data.length > 0) {
+                    print("if ......");
+                    return ExpensesSummary(
+                      expensesPerMonth: snapshot.data,
+                    );
+                  } else if (snapshot.hasError) {
+                    print("if else ......");
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Text('Error: ${snapshot.error}'),
+                    );
+                  } else {
+                    print("else ......");
+                    return Column(children: const <Widget>[
+                      SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: CircularProgressIndicator(),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 16),
+                        child: Text('Awaiting result...'),
+                      ),
+                    ]);
+                  }
+                }),
           ],
         ),
       ),
