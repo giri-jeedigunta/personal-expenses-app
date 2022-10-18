@@ -16,6 +16,12 @@ class ExpensesChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    expensesPerMonth.reduce((i, j) => {
+      print(i)
+      print(j)
+    })
+
     final simpleCurrencyFormatter =
         charts.BasicNumericTickFormatterSpec.fromNumberFormat(
             NumberFormat.compactSimpleCurrency());
